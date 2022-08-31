@@ -1,9 +1,9 @@
 public class Middle extends Thread{
-    private final int id;
-    private final int level;
-    private final Box startBox;
-    private final Box endBox;
-    private String message;
+    private int id;
+    private int level;
+    private Box startBox;
+    private Box endBox;
+    private String message = "";
 
     public Middle(int id, int level, Box startBox, Box endBox) {
         this.id = id;
@@ -12,8 +12,8 @@ public class Middle extends Thread{
         this.endBox = endBox;
     }
 
-    private void readBox(){
-        String message = startBox.retrieve();
+    private void consume(){
+        message += startBox.retrieve();
     }
 
     private void modifyAndSendMessage(){
@@ -21,4 +21,23 @@ public class Middle extends Thread{
         endBox.store(message);
     }
 
+    @Override
+    public void run() {
+//        System.out.println("Empieza proceso de medio");
+//        System.out.println("CAJA INICIAL \n" + startBox.numElements());
+//        System.out.println(startBox.elements());
+//
+//        System.out.println("CAJA FINAL \n" + endBox.numElements());
+//        System.out.println(endBox.elements());
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < startBox.numElements(); i++) {
+            consume();
+            modifyAndSendMessage();
+        }
+    }
 }

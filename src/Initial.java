@@ -1,6 +1,6 @@
 public class Initial extends Thread{
-    private final Box initialBox;
-    private final int nMessages;
+    private Box initialBox;
+    private int nMessages;
 
     public Initial(Box initialBox, int nMessages) {
         this.initialBox = initialBox;
@@ -15,6 +15,7 @@ public class Initial extends Thread{
 
     @Override
     public void run() {
+        if (initialBox.isFull()) Thread.yield();
         produce();
     }
 }
