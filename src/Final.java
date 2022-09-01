@@ -1,7 +1,7 @@
 public class Final extends Thread {
     private final Box finalBox;
     private final int nMessages;
-    private String message;
+    private String message = "";
 
     public Final(Box finalBox, int nMessages) {
         this.finalBox = finalBox;
@@ -9,13 +9,23 @@ public class Final extends Thread {
     }
 
     public void consume(){
-        for (int i = 0; i < nMessages; i++) {
-            finalBox.retrieve();
+
+        while (!finalBox.isFull(nMessages)){
+            Thread.yield();
         }
+        for (int i = 0; i < nMessages; i++) {
+            /**String tempMessage = finalBox.retrieve();
+            if (!tempMessage.equals("FIN")) {
+                message += tempMessage;
+            }**/
+            message += finalBox.retrieve();
+        }
+        System.out.println(message);
     }
 
     @Override
     public void run() {
+
         consume();
     }
 }

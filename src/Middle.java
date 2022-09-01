@@ -13,12 +13,31 @@ public class Middle extends Thread{
     }
 
     private void readBox(){
-        String message = startBox.retrieve();
+
+        message = startBox.retrieve();
+        modifyAndSendMessage();
     }
 
     private void modifyAndSendMessage(){
-        message += "T" + level + id;
-        endBox.store(message);
+
+        if (message.equals("FIN")){
+            endBox.store(message);
+        } else {
+            message += "T" + level + id;
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            endBox.store(message);
+            readBox();
+        }
+
     }
 
+    @Override
+    public void run() {
+
+        readBox();
+    }
 }

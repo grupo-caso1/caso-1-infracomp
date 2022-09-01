@@ -8,9 +8,22 @@ public class Initial extends Thread{
     }
 
     public void produce(){
+
         for (int i = 0; i < nMessages ; i++) {
+
+            while (initialBox.isFull(nMessages)){
+                Thread.yield();
+            }
             initialBox.store("M" + i);
         }
+
+        /**for (int i = 0; i < 3 ; i++) {
+
+            while (initialBox.isFull(nMessages)){
+                Thread.yield();
+            }
+            initialBox.store("FIN");
+        }**/
     }
 
     @Override
