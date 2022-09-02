@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 
 public class Box {
-    private ArrayList<String> buff; // where the messages are stored
-    private int n; // buffer size
-    private int id;
+    private final ArrayList<String> buff; // where the messages are stored
+    private final int n; // buffer size
 
-    public Box(int n, int id) {
-        this.buff = new ArrayList<String>();
+
+    public Box(int n) {
+        this.buff = new ArrayList<>();
         this.n = n;
-        this.id = id;
     }
 
     public synchronized void store(String message){
@@ -20,7 +19,6 @@ public class Box {
             }
         }
         buff.add(message);
-        System.out.println("Box " + this.id + " has " + buff.size() + " elements: " + buff.toString());
         this.notify();
     }
 
@@ -37,10 +35,8 @@ public class Box {
         return message;
     }
 
-    public synchronized boolean isFull() {return buff.size() == n;};
+    public synchronized boolean isFull() {return buff.size() == n;}
 
-    public synchronized boolean isEmpty() {return buff.size() == 0;};
-
-    public synchronized int numElements() {return  buff.size();};
+    public synchronized boolean isEmpty() {return buff.size() == 0;}
 
 }

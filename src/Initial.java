@@ -1,6 +1,6 @@
 public class Initial extends Thread{
-    private Box initialBox;
-    private int nMessages;
+    private final Box initialBox;
+    private final int nMessages;
 
     public Initial(Box initialBox, int nMessages) {
         this.initialBox = initialBox;
@@ -10,7 +10,11 @@ public class Initial extends Thread{
     public void produce(){
         for (int i = 0; i < nMessages ; i++) {
             initialBox.store("M" + i);
+            //System.out.println("Message " + i + " has been stored in initial");
         }
+        initialBox.store("FIN");
+        initialBox.store("FIN");
+        initialBox.store("FIN");
     }
 
     @Override
@@ -19,4 +23,3 @@ public class Initial extends Thread{
         produce();
     }
 }
-

@@ -1,9 +1,10 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Middle extends Thread{
-    private int id;
-    private int level;
-    private Box startBox;
-    private Box endBox;
-    private String message = "";
+    private final int id;
+    private final int level;
+    private final Box startBox;
+    private final Box endBox;
 
     public Middle(int id, int level, Box startBox, Box endBox) {
         this.id = id;
@@ -12,26 +13,33 @@ public class Middle extends Thread{
         this.endBox = endBox;
     }
 
-    private void consume(){
-        message += startBox.retrieve();
+    private String consume(){
+        return startBox.retrieve();
     }
 
-    private void modifyAndSendMessage(){
-        message += "T" + level + id;
+    private void modifyAndSendMessage(String received){
+        String message = ""; //message has to be reset
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(50, 500));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        message += received + "T" + level + id;
         endBox.store(message);
+
     }
 
     @Override
     public void run() {
-        try {
-            sleep(1000); //sleeps thread for everything to work correctly
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        boolean working = true;
+        while (working) {
+            String received = consume();
+            if (received.equals("FIN")) {
+                working = false;
+                endBox.store(received);
+            }
+            else modifyAndSendMessage(received);
 
-        for (int i = 0; i < startBox.numElements(); i++) {
-            consume();
-            modifyAndSendMessage();
         }
     }
 }
