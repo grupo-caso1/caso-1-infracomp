@@ -10,14 +10,14 @@ public class Final extends Thread {
 
     public void consume(){
         for (int i = 0; i < nMessages; i++) {
-            String message = finalBox.retrieve(); // no está sacando porque piensa que no hay nada y se pone a esperar!!
-            System.out.println(message);
+            String message = finalBox.retrieve();
         }
     }
 
     @Override
     public void run() {
-        if (finalBox.isEmpty()) {Thread.yield();}
+        while (finalBox.isEmpty()) {Thread.yield();}
         consume();
+        System.out.println(message);
     }
 }

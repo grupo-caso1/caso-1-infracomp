@@ -15,7 +15,7 @@ public class Initial extends Thread{
 
     @Override
     public void run() {
-        if (initialBox.isFull()) Thread.yield();
+        while (initialBox.isFull()) Thread.yield();
         produce();
     }
 }

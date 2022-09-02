@@ -23,14 +23,8 @@ public class Middle extends Thread{
 
     @Override
     public void run() {
-//        System.out.println("Empieza proceso de medio");
-//        System.out.println("CAJA INICIAL \n" + startBox.numElements());
-//        System.out.println(startBox.elements());
-//
-//        System.out.println("CAJA FINAL \n" + endBox.numElements());
-//        System.out.println(endBox.elements());
         try {
-            sleep(1000);
+            sleep(1000); //sleeps thread for everything to work correctly
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
