@@ -10,15 +10,15 @@ public class Final extends Thread {
 
     public void consume(){
 
-        while (!finalBox.isFull(nMessages)){
+        while (!finalBox.processEnded(nMessages +3)){
             Thread.yield();
+
         }
-        for (int i = 0; i < nMessages; i++) {
-            /**String tempMessage = finalBox.retrieve();
+        for (int i = 0; i < nMessages +3; i++) {
+            String tempMessage = finalBox.retrieve();
             if (!tempMessage.equals("FIN")) {
                 message += tempMessage;
-            }**/
-            message += finalBox.retrieve();
+            }
         }
         System.out.println(message);
     }
@@ -27,5 +27,6 @@ public class Final extends Thread {
     public void run() {
 
         consume();
+
     }
 }

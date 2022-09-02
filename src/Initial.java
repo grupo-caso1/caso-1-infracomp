@@ -11,24 +11,26 @@ public class Initial extends Thread{
 
         for (int i = 0; i < nMessages ; i++) {
 
-            while (initialBox.isFull(nMessages)){
+            while (initialBox.isFull()){
                 Thread.yield();
             }
             initialBox.store("M" + i);
         }
 
-        /**for (int i = 0; i < 3 ; i++) {
+        for (int i = 0; i < 3 ; i++) {
 
-            while (initialBox.isFull(nMessages)){
+            while (initialBox.isFull()){
                 Thread.yield();
             }
             initialBox.store("FIN");
-        }**/
+        }
     }
 
     @Override
     public void run() {
+
         produce();
+
     }
 }
 
