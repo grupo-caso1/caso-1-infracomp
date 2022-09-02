@@ -5,6 +5,7 @@ public class Box {
     private final int n; // buffer size
 
     boolean full = false;
+    boolean ended = false;
 
     public Box(int n) {
         this.buff = new ArrayList< > ();
@@ -20,7 +21,7 @@ public class Box {
             }
         }
         buff.add(message);
-        notifyAll();
+        notify();
         }
 
 
@@ -33,7 +34,7 @@ public class Box {
             }
         }
         String message = buff.remove(0);
-        notifyAll();
+        notify();
         return message;
     }
 
@@ -48,8 +49,8 @@ public class Box {
     public synchronized boolean processEnded (int nMessages) {
 
         if (buff.size() == nMessages){
-            full = true;
+            ended = true;
         }
-        return full;
+        return ended;
     }
 }

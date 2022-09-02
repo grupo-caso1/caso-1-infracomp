@@ -49,5 +49,6 @@ public class Middle extends Thread{
     public void run() {
 
         readBox();
+
     }
 }
