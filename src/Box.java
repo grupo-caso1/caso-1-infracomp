@@ -5,7 +5,6 @@ public class Box {
     private final int n; // buffer size
 
     boolean full = false;
-    boolean ended = false;
 
     public Box(int n) {
         this.buff = new ArrayList< > ();
@@ -46,11 +45,8 @@ public class Box {
         return full;
     }
 
-    public synchronized boolean processEnded (int nMessages) {
+    public synchronized Integer numElements () {
 
-        if (buff.size() == nMessages){
-            ended = true;
-        }
-        return ended;
+        return buff.size();
     }
 }

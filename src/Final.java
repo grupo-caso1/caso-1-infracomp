@@ -10,7 +10,7 @@ public class Final extends Thread {
 
     public void consume(){
 
-        while (!finalBox.processEnded(nMessages +3)){
+        while (!(finalBox.numElements() == nMessages +3)){
             Thread.yield();
 
         }
