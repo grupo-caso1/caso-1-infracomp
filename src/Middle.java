@@ -39,7 +39,6 @@ public class Middle extends Thread{
                 endBox.store(received);
             }
             else modifyAndSendMessage(received);
-
         }
     }
 }
