@@ -1,21 +1,27 @@
 public class Final extends Thread {
     private final Box finalBox;
-    private final int nMessages;
-    private String message;
+    private String message = "";
 
-    public Final(Box finalBox, int nMessages) {
+    public Final(Box finalBox) {
         this.finalBox = finalBox;
-        this.nMessages = nMessages;
     }
 
+    @SuppressWarnings("StringConcatenationInLoop")
     public void consume(){
-        for (int i = 0; i < nMessages; i++) {
-            finalBox.retrieve();
+        int threeEnds = 3;
+        while (threeEnds != 0) {
+            while (finalBox.isEmpty()) {Thread.yield();}
+            String retrieved = finalBox.retrieve();
+            if (retrieved.equals("FIN")){threeEnds--;}
+            if (threeEnds == 0){message += retrieved;}
+            else {message += retrieved + ",";}
+            }
         }
-    }
+
 
     @Override
     public void run() {
         consume();
+        System.out.println(message);
     }
 }
