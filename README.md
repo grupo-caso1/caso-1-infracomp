@@ -5,7 +5,6 @@ Este repositorio contiene nuestra solución al caso 1 del curso Infraestructura 
 Este proyecto fue desarrollado en IntelliJ, es recomendable instalar este IDE para ver y ejecutar el proyecto. Sobre el flujo de la aplicación y cómo funciona (entradas, salidas) ir a `docs/docu.pdf`.
 
 ## Integrantes
-+ Sebastian Andrés Ospino Salinas - [sa.ospino](mailto:sa.ospino@uniandes.edu.co): 201913643
 
     
 
