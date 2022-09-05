@@ -1,13 +1,9 @@
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-
 public class Middle extends Thread{
     private final int id;
     private final int level;
     private final Box startBox;
     private final Box endBox;
     private String message;
-    public static CyclicBarrier barrier = new CyclicBarrier(3);
 
     public Middle(int id, int level, Box startBox, Box endBox) {
         this.id = id;
@@ -25,11 +21,6 @@ public class Middle extends Thread{
     private void modifyAndSendMessage(){
 
         if (message.equals("FIN")){
-            try {
-                barrier.await();
-            } catch (BrokenBarrierException | InterruptedException e) {
-                e.printStackTrace();
-            }
             endBox.store(message);
 
         } else {

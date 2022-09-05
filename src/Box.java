@@ -4,8 +4,6 @@ public class Box {
     private final ArrayList<String> buff; // where the messages are stored
     private final int n; // buffer size
 
-    boolean full = false;
-
     public Box(int n) {
         this.buff = new ArrayList< > ();
         this.n = n;
@@ -39,14 +37,18 @@ public class Box {
 
     public synchronized boolean isFull () {
 
-        if (buff.size() == n){
-            full = true;
-        }
-        return full;
+        return buff.size() == n;
+    }
+
+    public synchronized boolean isEmpty () {
+
+        return buff.size() == 0;
     }
 
     public synchronized Integer numElements () {
 
         return buff.size();
     }
+
+
 }
