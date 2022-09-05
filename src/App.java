@@ -10,7 +10,7 @@ public class App {
         System.out.println("Tamaño de buzones intermedios:");
         int sizeBuzonesIntermedios = input.nextInt();
 
-        System.out.println("Tamaño de buzones extremos:"); // Debe ser >= nSubconjuntos + 3
+        System.out.println("Tamaño de buzones extremos:");
         int sizeBuzonesExtremos = input.nextInt();
 
 
