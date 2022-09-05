@@ -17,7 +17,7 @@ public class Middle extends Thread{
         return startBox.retrieve();
     }
 
-    private void modifyAndSendMessage(String received){
+    private void modify(String received){
         String message = ""; //message has to be reset
         try {
             Thread.sleep(ThreadLocalRandom.current().nextInt(50, 500));
@@ -38,7 +38,7 @@ public class Middle extends Thread{
                 working = false;
                 endBox.store(received);
             }
-            else modifyAndSendMessage(received);
+            else modify(received);
         }
     }
 }
